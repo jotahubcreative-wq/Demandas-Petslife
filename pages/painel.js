@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Head from 'next/head'
 import { supabase } from '../lib/supabase'
 
-const COLS = ['Novo','Em andamento','Em revisão','Entregue']
+const COLS = ['Novo','Em andamento','Em revisão','Entregue','Cancelado']
 const TIPO_ICO = {'Posts Redes Sociais':'📱','Vídeos / Reels':'🎬','Materiais Impressos':'🖨️','Apresentações':'📊','E-mail Marketing':'📧','Material Trade':'🏪','Evento':'🐾','Outros':'✨'}
 const BAR_COLOR = {Novo:'var(--info)','Em andamento':'var(--accent)','Em revisão':'var(--warn)',Entregue:'var(--success)',Cancelado:'var(--muted)'}
 
@@ -162,7 +162,8 @@ export default function Painel() {
     and:demandas.filter(d=>d.status==='Em andamento').length,
     rev:demandas.filter(d=>d.status==='Em revisão').length,
     ent:demandas.filter(d=>d.status==='Entregue').length,
-    urg:demandas.filter(d=>d.prioridade==='Urgente'&&d.status!=='Entregue').length,
+    urg:demandas.filter(d=>d.prioridade==='Urgente'&&d.status!=='Entregue'&&d.status!=='Cancelado').length,
+    can:demandas.filter(d=>d.status==='Cancelado').length,
   }
 
   /* ── RELATÓRIO ──────────────────────────────── */
@@ -216,7 +217,7 @@ export default function Painel() {
 
         {/* STATSBAR */}
         <div className="statsbar">
-          {[['todos','all','Total',stats.all,'s-all'],['Novo','novo','Novos',stats.novo,'s-novo'],['Em andamento','and','Em Andamento',stats.and,'s-and'],['Em revisão','rev','Em Revisão',stats.rev,'s-rev'],['Entregue','ent','Entregues',stats.ent,'s-ent'],['urg','urg','Urgentes',stats.urg,'s-urg']].map(([f,_,l,n,cls])=>(
+          {[['todos','all','Total',stats.all,'s-all'],['Novo','novo','Novos',stats.novo,'s-novo'],['Em andamento','and','Em Andamento',stats.and,'s-and'],['Em revisão','rev','Em Revisão',stats.rev,'s-rev'],['Entregue','ent','Entregues',stats.ent,'s-ent'],['urg','urg','Urgentes',stats.urg,'s-urg'],['Cancelado','can','Cancelados',stats.can,'s-can']].map(([f,_,l,n,cls])=>(
             <div key={f} className={`stat ${cls}${filtroStat===f?' active':''}`} onClick={()=>setFiltroStat(f)}>
               <div className="stat-n">{n}</div><div className="stat-l">{l}</div>
             </div>
@@ -284,8 +285,8 @@ export default function Painel() {
             <div className="kanban-view">
               {COLS.map(col=>{
                 const cards = filtered.filter(d=>d.status===col)
-                const clsMap = {Novo:'kb-c-novo','Em andamento':'kb-c-and','Em revisão':'kb-c-rev',Entregue:'kb-c-ent'}
-                const emoMap = {Novo:'📥','Em andamento':'⚡','Em revisão':'🔍',Entregue:'✅'}
+                const clsMap = {Novo:'kb-c-novo','Em andamento':'kb-c-and','Em revisão':'kb-c-rev',Entregue:'kb-c-ent',Cancelado:'kb-c-can'}
+                const emoMap = {Novo:'📥','Em andamento':'⚡','Em revisão':'🔍',Entregue:'✅',Cancelado:'🚫'}
                 return (
                   <div key={col} className={`kb-col ${clsMap[col]}`}
                     onDragOver={e=>{e.preventDefault();e.currentTarget.querySelector('.kb-cards').classList.add('drag-over')}}
@@ -563,7 +564,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text)}
 .stat.active::after{background:var(--accent)}
 .stat-n{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;line-height:1;margin-bottom:2px}
 .stat-l{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-.s-all .stat-n{color:var(--text)}.s-novo .stat-n{color:var(--info)}.s-and .stat-n{color:var(--accent)}.s-rev .stat-n{color:var(--warn)}.s-ent .stat-n{color:var(--success)}.s-urg .stat-n{color:var(--danger)}
+.s-all .stat-n{color:var(--text)}.s-novo .stat-n{color:var(--info)}.s-and .stat-n{color:var(--accent)}.s-rev .stat-n{color:var(--warn)}.s-ent .stat-n{color:var(--success)}.s-urg .stat-n{color:var(--danger)}.s-can .stat-n{color:var(--muted)}
 .toolbar{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--s1);border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
 .vbtn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
 .vbtn:hover{background:var(--s2);color:var(--text)}
@@ -613,7 +614,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text)}
 .kb-c-novo .kb-title{color:var(--info)}.kb-c-novo .kb-bar{background:var(--info)}
 .kb-c-and .kb-title{color:var(--accent)}.kb-c-and .kb-bar{background:var(--accent)}
 .kb-c-rev .kb-title{color:var(--warn)}.kb-c-rev .kb-bar{background:var(--warn)}
-.kb-c-ent .kb-title{color:var(--success)}.kb-c-ent .kb-bar{background:var(--success)}
+.kb-c-ent .kb-title{color:var(--success)}.kb-c-ent .kb-bar{background:var(--success)}.kb-c-can .kb-title{color:var(--muted)}.kb-c-can .kb-bar{background:var(--muted)}
 .kb-cards{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:60px;transition:background .15s}
 .kb-cards::-webkit-scrollbar{width:3px}
 .kb-cards::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
