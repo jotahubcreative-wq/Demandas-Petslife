@@ -160,7 +160,7 @@ export default function Acompanhar() {
           </div>
         )}
 
-        <p className="footer">PETSLIFE © 2026 · Marketing</p>
+        <p className="footer">PETSLIFE © 2026 · Marketing · <a href="https://www.jottahub.com.br" target="_blank" rel="noopener" style={{color:"var(--muted)",textDecoration:"none",transition:"color .2s"}} onMouseOver={e=>e.target.style.color="var(--accent)"} onMouseOut={e=>e.target.style.color="var(--muted)"}>Sistema desenvolvido por JottaHub</a></p>
       </div>
     </>
   )
@@ -239,6 +239,6 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .not-found-ico{font-size:40px;margin-bottom:12px;opacity:.5}
 .not-found-txt{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
 .not-found-sub{font-size:13px;color:var(--muted)}
-.footer{text-align:center;margin-top:36px;font-size:11px;color:var(--muted);opacity:.35;font-family:'Space Mono',monospace;letter-spacing:1px}
+.footer{text-align:center;margin-top:36px;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px}.footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(0,172,235,.3);padding-bottom:1px;transition:color .2s,border-color .2s}.footer a:hover{color:var(--accent);border-color:var(--accent)}
 @media(max-width:500px){.search-row{flex-direction:column}.info-grid,.entrega-grid{grid-template-columns:1fr}}
 `
