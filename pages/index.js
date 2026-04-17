@@ -372,7 +372,7 @@ export default function Formulario() {
           </button>
         </div>
 
-        <p className="footer">PETSLIFE © 2026 · Marketing</p>
+        <p className="footer">PETSLIFE © 2026 · Marketing · <a href="https://www.jottahub.com.br" target="_blank" rel="noopener" style={{color:"var(--muted)",textDecoration:"none",transition:"color .2s"}} onMouseOver={e=>e.target.style.color="var(--accent)"} onMouseOut={e=>e.target.style.color="var(--muted)"}>Sistema desenvolvido por JottaHub</a></p>
       </div>
     </>
   )
@@ -476,7 +476,7 @@ textarea{min-height:115px;resize:vertical;line-height:1.6}
 .btn-sub.loading .btxt{opacity:.4}
 .spin{display:block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .55s linear infinite;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.footer{text-align:center;margin-top:36px;font-size:11px;color:var(--muted);opacity:.35;font-family:'Space Mono',monospace;letter-spacing:1px}
+.footer{text-align:center;margin-top:36px;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px}.footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(0,172,235,.3);padding-bottom:1px;transition:color .2s,border-color .2s}.footer a:hover{color:var(--accent);border-color:var(--accent)}
 .suc-bg{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:32px}
 .suc-box{text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
 .suc-ico{width:72px;height:72px;border-radius:50%;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);display:flex;align-items:center;justify-content:center;font-size:32px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
