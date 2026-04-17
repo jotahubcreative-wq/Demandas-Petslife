@@ -518,6 +518,9 @@ export default function Painel() {
         </div>
       )}
 
+      {/* FOOTER */}
+      <div style={{textAlign:"center",padding:"10px 0 6px",fontSize:11,color:"var(--muted)",fontFamily:"Space Mono,monospace",letterSpacing:1,borderTop:"1px solid var(--border)",background:"var(--s1)",flexShrink:0}}>PETSLIFE © 2026 · Marketing · <a href="https://www.jottahub.com.br" target="_blank" rel="noopener" style={{color:"var(--muted)",textDecoration:"none",borderBottom:"1px solid rgba(0,172,235,.3)",paddingBottom:1}}>Sistema desenvolvido por JottaHub</a></div>
+
       {/* TOAST */}
       <div className={`toast${toast.show?' show':''} t${toast.tipo}`}>{toast.msg}</div>
     </>
