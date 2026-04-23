@@ -208,7 +208,7 @@ export default function Formulario() {
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
       </Head>
-      <style>{tema === 'dark' ? cssDark : css}</style>
+      <style>{css}{tema === 'dark' ? cssDark : ''}</style>
 
       <div className="orb orb-a"/><div className="orb orb-b"/>
 
