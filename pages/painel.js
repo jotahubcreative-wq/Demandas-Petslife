@@ -10,6 +10,7 @@ const SETORES = ['Comercial','Eventos','Financeiro','Administração','Gente e G
 const TIPOS   = ['Posts Redes Sociais','Vídeos / Reels','Materiais Impressos','Apresentações','E-mail Marketing','Material Trade','Evento','Outros']
 
 export default function Painel() {
+  const [tema, setTema]       = useState('light')
   const [user, setUser]       = useState(null)
   const [email, setEmail]     = useState('')
   const [senha, setSenha]     = useState('')
@@ -34,10 +35,18 @@ export default function Painel() {
 
   /* ── AUTH ───────────────────────────────────── */
   useEffect(() => {
+    const saved = localStorage.getItem('pet-tema') || 'light'
+    setTema(saved)
     supabase.auth.getSession().then(({data}) => {
       if (data?.session?.user) iniciar(data.session.user)
     })
   }, [])
+
+  function toggleTema() {
+    const novo = tema === 'light' ? 'dark' : 'light'
+    setTema(novo)
+    localStorage.setItem('pet-tema', novo)
+  }
 
   async function login() {
     setLoginErr('')
@@ -187,7 +196,7 @@ export default function Painel() {
   if (!user) return (
     <>
       <Head><title>Painel · Petslife Marketing</title></Head>
-      <style>{css}</style>
+      <style>{tema==='dark'?cssDark:css}</style>
       <div className="login-bg">
         <div className="login-box">
           <div className="login-badge"><div className="badge-dot"/><span>🐾 Marketing Petslife</span></div>
@@ -208,7 +217,7 @@ export default function Painel() {
   return (
     <>
       <Head><title>Painel · Petslife Marketing</title></Head>
-      <style>{css}</style>
+      <style>{tema==='dark'?cssDark:css}</style>
 
       <div className="shell">
         {/* TOPBAR */}
@@ -216,6 +225,9 @@ export default function Painel() {
           <div className="topbar-logo">PETSLIFE <span>·</span> Marketing</div>
           <span className="topbar-user">{user?.email}</span>
           <button className="btn-rel" onClick={()=>{setRelMes(mesesDisp[0]||'');setShowRel(true)}}>📊 Relatório</button>
+          <button onClick={toggleTema} style={{background:'transparent',border:'1px solid var(--border)',borderRadius:'100px',padding:'6px 14px',fontSize:12,fontWeight:600,cursor:'pointer',color:'var(--muted)',fontFamily:"'Outfit',sans-serif",display:'flex',alignItems:'center',gap:6}}>
+            {tema==='light'?'🌙 Escuro':'☀️ Claro'}
+          </button>
           <button className="btn-sair" onClick={logout}>Sair</button>
         </div>
 
@@ -531,6 +543,13 @@ export default function Painel() {
     </>
   )
 }
+
+const cssDark = `
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#03080F;--s1:#070E17;--s2:#0C1520;--s3:#111C2B;--accent:#00ACEB;--accent2:#0070C0;--glow:rgba(0,172,235,.18);--text:#EFF6FF;--muted:#5E7A96;--border:#0F2133;--border2:#172840;--success:#4ade80;--danger:#F86F6F;--warn:#F9A743;--info:#60a5fa}
+html,body{height:100%}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text)}
+`
 
 const css = `
 *{margin:0;padding:0;box-sizing:border-box}
