@@ -196,7 +196,7 @@ export default function Painel() {
   if (!user) return (
     <>
       <Head><title>Painel · Petslife Marketing</title></Head>
-      <style>{tema==='dark'?cssDark:css}</style>
+      <style>{css}{tema==='dark'?cssDark:''}</style>
       <div className="login-bg">
         <div className="login-box">
           <div className="login-badge"><div className="badge-dot"/><span>🐾 Marketing Petslife</span></div>
@@ -217,7 +217,7 @@ export default function Painel() {
   return (
     <>
       <Head><title>Painel · Petslife Marketing</title></Head>
-      <style>{tema==='dark'?cssDark:css}</style>
+      <style>{css}{tema==='dark'?cssDark:''}</style>
 
       <div className="shell">
         {/* TOPBAR */}
@@ -545,10 +545,12 @@ export default function Painel() {
 }
 
 const cssDark = `
-*{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#03080F;--s1:#070E17;--s2:#0C1520;--s3:#111C2B;--accent:#00ACEB;--accent2:#0070C0;--glow:rgba(0,172,235,.18);--text:#EFF6FF;--muted:#5E7A96;--border:#0F2133;--border2:#172840;--success:#4ade80;--danger:#F86F6F;--warn:#F9A743;--info:#60a5fa}
-html,body{height:100%}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text)}
+.login-box{box-shadow:0 8px 40px rgba(0,172,235,.1)}
+.kb-card{box-shadow:none}
+.kb-col{box-shadow:none}
+.det{box-shadow:none}
+.topbar{box-shadow:none}
 `
 
 const css = `
