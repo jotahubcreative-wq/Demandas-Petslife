@@ -3,16 +3,25 @@ import Head from 'next/head'
 import { supabase } from '../lib/supabase'
 
 export default function Acompanhar() {
+  const [tema, setTema]         = useState('light')
   const [proto, setProto]       = useState('')
   const [demanda, setDemanda]   = useState(null)
   const [notFound, setNotFound] = useState(false)
   const [loading, setLoading]   = useState(false)
 
   useEffect(() => {
+    const saved = localStorage.getItem('pet-tema') || 'light'
+    setTema(saved)
     const params = new URLSearchParams(window.location.search)
     const p = params.get('protocolo')
     if (p) { setProto(p.toUpperCase()); buscar(p.toUpperCase()) }
   }, [])
+
+  function toggleTema() {
+    const novo = tema === 'light' ? 'dark' : 'light'
+    setTema(novo)
+    localStorage.setItem('pet-tema', novo)
+  }
 
   async function buscar(p) {
     const q = (p || proto).trim().toUpperCase()
@@ -36,12 +45,15 @@ export default function Acompanhar() {
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
       </Head>
-      <style>{css}</style>
+      <style>{tema==='dark'?cssDark:css}</style>
 
       <div className="orb orb-a"/><div className="orb orb-b"/>
 
       <div className="wrap">
-        <div className="header">
+        <div className="header" style={{position:'relative'}}>
+          <button onClick={toggleTema} style={{position:'absolute',top:0,right:0,background:'transparent',border:'1px solid var(--border)',borderRadius:'100px',padding:'6px 14px',fontSize:12,fontWeight:600,cursor:'pointer',color:'var(--muted)',fontFamily:"'Outfit',sans-serif",transition:'all .2s',display:'flex',alignItems:'center',gap:6}}>
+            {tema==='light'?'🌙 Escuro':'☀️ Claro'}
+          </button>
           <div className="badge"><div className="badge-dot"/><span>🐾 Marketing Petslife</span></div>
           <h1>Acompanhar<br/>Pedido</h1>
           <p>Digite o protocolo recebido por e-mail ou WhatsApp<br/>para consultar o status da sua solicitação.</p>
@@ -166,34 +178,40 @@ export default function Acompanhar() {
   )
 }
 
-const css = `
+const cssDark = `
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#03080F;--s1:#070E17;--s2:#0C1520;--accent:#00ACEB;--accent2:#0070C0;--glow:rgba(0,172,235,.2);--text:#EFF6FF;--muted:#5E7A96;--border:#0F2133;--success:#4ade80;--danger:#F86F6F;--warn:#F9A743;--info:#60a5fa}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+`
+
+const css = `
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F7FA;--s1:#FFFFFF;--s2:#F0F4F8;--accent:#0070C0;--accent2:#005A9E;--glow:rgba(0,112,192,.15);--text:#0F1C2E;--muted:#6B7C93;--border:#D8E2EE;--success:#16a34a;--danger:#DC2626;--warn:#D97706;--info:#2563EB}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.orb{position:fixed;border-radius:50%;filter:blur(140px);z-index:0;pointer-events:none;opacity:.08}
+.orb{position:fixed;border-radius:50%;filter:blur(140px);z-index:0;pointer-events:none;opacity:.03}
 .orb-a{width:600px;height:600px;background:var(--accent);top:-200px;right:-150px}
 .orb-b{width:500px;height:500px;background:var(--accent2);bottom:-150px;left:-100px}
 .wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:52px 24px 80px}
 .header{text-align:center;margin-bottom:48px}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:100px;background:rgba(0,172,235,.08);border:1px solid rgba(0,172,235,.22);margin-bottom:24px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:100px;background:rgba(0,112,192,.08);border:1px solid rgba(0,112,192,.2);margin-bottom:24px}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 .badge span{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
-.header h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-1.5px;line-height:1;background:linear-gradient(140deg,var(--text) 40%,#00ACEB);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.header h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-1.5px;line-height:1;background:linear-gradient(140deg,var(--text) 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
 .header p{font-size:14px;color:var(--muted);line-height:1.7}
-.search-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:32px 28px;margin-bottom:20px;position:relative;overflow:hidden}
-.search-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,172,235,.5),rgba(0,112,192,.3),transparent)}
+.search-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:32px 28px;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.search-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:20px 20px 0 0}
 .search-label{font-size:13px;font-weight:500;color:var(--text);margin-bottom:10px;display:block}
 .search-row{display:flex;gap:10px}
-.search-input{flex:1;padding:13px 16px;background:#040C15;border:1px solid var(--border);border-radius:11px;color:var(--text);font-family:'Space Mono',monospace;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;letter-spacing:1px;text-transform:uppercase}
+.search-input{flex:1;padding:13px 16px;background:var(--s2);border:1px solid var(--border);border-radius:11px;color:var(--text);font-family:'Space Mono',monospace;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;letter-spacing:1px;text-transform:uppercase}
 .search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
 .btn-buscar{padding:13px 22px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:11px;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-buscar:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 24px var(--glow)}
 .btn-buscar:disabled{opacity:.5;cursor:not-allowed}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.res-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative;margin-bottom:16px}
-.res-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,172,235,.5),rgba(0,112,192,.3),transparent)}
+.res-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.res-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 .res-head{padding:24px 24px 20px;border-bottom:1px solid var(--border)}
 .res-tipo{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .res-titulo{font-size:20px;font-weight:700;letter-spacing:-.5px;margin-bottom:14px;line-height:1.2}
@@ -203,7 +221,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .tl-steps{display:flex;position:relative}
 .tl-steps::before{content:'';position:absolute;top:18px;left:18px;right:18px;height:2px;background:var(--border);z-index:0}
 .tl-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1}
-.tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid var(--border);background:var(--s2);transition:all .3s}
+.tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid var(--border);background:var(--s1);transition:all .3s}
 .tl-dot.done{background:var(--success);border-color:var(--success)}
 .tl-dot.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
 .tl-dot.cancel{background:var(--danger);border-color:var(--danger)}
