@@ -193,6 +193,9 @@ export default function Formulario() {
           <p className="suc-p">
   Sua demanda foi registrada com sucesso. Você receberá confirmação por e-mail.<br/>O time de marketing entrará em contato em breve.
 </p>
+          <div className="suc-aviso">
+            📬 <strong>Não recebeu o email?</strong> Confira a pasta de <strong>Spam/Lixo Eletrônico</strong> e marque <code>demandas@demandaspetslife.jottahub.com.br</code> como remetente confiável.
+          </div>
           <button className="btn-novo" onClick={novo}>Fazer novo pedido</button>
         </div>
       </div>
@@ -498,6 +501,9 @@ textarea{min-height:115px;resize:vertical;line-height:1.6}
 .suc-h2{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--text)}
 .suc-proto{font-family:'Space Mono',monospace;font-size:14px;color:#4ade80;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.18);padding:8px 20px;border-radius:100px}
 .suc-p{font-size:14px;color:var(--muted);max-width:340px;line-height:1.7}
+.suc-aviso{font-size:12.5px;color:#fbbf24;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:12px 16px;max-width:380px;line-height:1.6;text-align:left}
+.suc-aviso strong{color:#fcd34d;font-weight:600}
+.suc-aviso code{font-family:'Space Mono',monospace;font-size:11.5px;background:rgba(245,158,11,.1);padding:1px 5px;border-radius:4px;color:#fde68a;word-break:break-all}
 .btn-novo{padding:12px 28px;background:transparent;border:1px solid var(--border);border-radius:11px;color:var(--muted);font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
 .btn-novo:hover{border-color:var(--accent);color:var(--accent)}
 @media(max-width:600px){.card{padding:24px 18px}.row,.tgrid{grid-template-columns:1fr}.estados-grid{grid-template-columns:repeat(3,1fr)}.fmt-grid{grid-template-columns:1fr !important}}
