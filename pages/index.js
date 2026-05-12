@@ -191,9 +191,8 @@ export default function Formulario() {
           <h2 className="suc-h2">Pedido Enviado!</h2>
           <div className="suc-proto">{protocolo}</div>
           <p className="suc-p">
-            Sua demanda foi registrada com sucesso. Você receberá confirmação por e-mail
-            {form.whatsapp ? ' e WhatsApp' : ''}.<br/>O time de marketing entrará em contato em breve.
-          </p>
+  Sua demanda foi registrada com sucesso. Você receberá confirmação por e-mail.<br/>O time de marketing entrará em contato em breve.
+</p>
           <button className="btn-novo" onClick={novo}>Fazer novo pedido</button>
         </div>
       </div>
