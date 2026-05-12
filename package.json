@@ -8,10 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "14.2.3",
+    "@supabase/supabase-js": "^2",
+    "next": "^14.2.35",
     "react": "^18",
     "react-dom": "^18",
-    "@supabase/supabase-js": "^2",
     "resend": "^3",
     "twilio": "^5"
   }
