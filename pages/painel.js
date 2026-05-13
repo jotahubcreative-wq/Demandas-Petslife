@@ -195,7 +195,7 @@ export default function Painel() {
   /* ── LOGIN ──────────────────────────────────── */
   if (!user) return (
     <>
-      <Head><title>Painel · Petslife Marketing</title></Head>
+      <Head><title>Painel · Petslife Marketing</title><meta name="viewport" content="width=device-width,initial-scale=1"/></Head>
       <style>{css}{tema==='dark'?cssDark:''}</style>
       <div className="login-bg">
         <div className="login-box">
@@ -216,7 +216,7 @@ export default function Painel() {
   /* ── APP ────────────────────────────────────── */
   return (
     <>
-      <Head><title>Painel · Petslife Marketing</title></Head>
+      <Head><title>Painel · Petslife Marketing</title><meta name="viewport" content="width=device-width,initial-scale=1"/></Head>
       <style>{css}{tema==='dark'?cssDark:''}</style>
 
       <div className="shell">
@@ -768,6 +768,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text)}
 .eli-obs{font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border);line-height:1.6}
 .toast{position:fixed;bottom:22px;right:22px;transform:translateY(120px);padding:11px 18px;border-radius:12px;font-size:13px;font-weight:500;z-index:9999;transition:transform .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 30px rgba(0,0,0,.15);background:var(--s1);border:1px solid var(--border);color:var(--text);max-width:300px}
 .toast.show{transform:translateY(0)}.toast.tok{border-color:rgba(74,222,128,.3);color:var(--success)}.toast.terr{border-color:rgba(248,111,111,.3);color:var(--danger)}
-@media(max-width:900px){.det{width:100%;position:fixed;inset:0;z-index:200;border:none;border-top:1px solid var(--border)}.kpi-grid{grid-template-columns:repeat(2,1fr)}.kb-col{flex:0 0 240px}}
-@media(max-width:580px){.tipo-grid,.mrow{grid-template-columns:1fr}}
+@media(max-width:900px){.det{width:100%;position:fixed;inset:0;z-index:200;border:none;border-top:1px solid var(--border)}.kpi-grid{grid-template-columns:repeat(2,1fr)}.kb-col{flex:0 0 280px}}
+@media(max-width:768px){input,select,textarea{font-size:16px !important}.topbar{padding:0 12px;gap:6px}.topbar-user{display:none}.topbar-logo{font-size:11px;letter-spacing:.5px}.btn-rel{padding:6px 10px;font-size:11px}.toolbar{padding:8px 12px;gap:6px}.login-box{padding:28px 22px;margin:0 16px}.det-head{padding:16px 18px 0}.det-body{padding:0 18px 20px}}
+@media(max-width:580px){.tipo-grid,.mrow{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr);gap:8px}.kb-col{flex:0 0 84vw;max-width:340px}.det-info{grid-template-columns:1fr}.det-titulo{font-size:17px}.kpi-n{font-size:22px}.kpi-l{font-size:10px}}
 `

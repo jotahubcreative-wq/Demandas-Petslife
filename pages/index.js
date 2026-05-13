@@ -506,7 +506,7 @@ textarea{min-height:115px;resize:vertical;line-height:1.6}
 .suc-aviso code{font-family:'Space Mono',monospace;font-size:11.5px;background:rgba(245,158,11,.1);padding:1px 5px;border-radius:4px;color:#fde68a;word-break:break-all}
 .btn-novo{padding:12px 28px;background:transparent;border:1px solid var(--border);border-radius:11px;color:var(--muted);font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
 .btn-novo:hover{border-color:var(--accent);color:var(--accent)}
-@media(max-width:600px){.card{padding:24px 18px}.row,.tgrid{grid-template-columns:1fr}.estados-grid{grid-template-columns:repeat(3,1fr)}.fmt-grid{grid-template-columns:1fr !important}}
+@media(max-width:600px){.card{padding:24px 18px}.row,.tgrid{grid-template-columns:1fr}.estados-grid{grid-template-columns:repeat(3,1fr)}.fmt-grid{grid-template-columns:1fr !important}input,select,textarea{font-size:16px !important}.suc-aviso{font-size:11.5px;padding:10px 14px}.suc-aviso code{font-size:10.5px}.suc-h2{font-size:24px}.suc-bg{padding:20px}}
 `
 
 const cssDark = `
@@ -617,6 +617,6 @@ textarea{min-height:115px;resize:vertical;line-height:1.6}
 .suc-p{font-size:14px;color:var(--muted);max-width:340px;line-height:1.7}
 .btn-novo{padding:12px 28px;background:transparent;border:1px solid var(--border);border-radius:11px;color:var(--muted);font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
 .btn-novo:hover{border-color:var(--accent);color:var(--accent)}
-@media(max-width:600px){.card{padding:24px 18px}.row,.tgrid{grid-template-columns:1fr}.estados-grid{grid-template-columns:repeat(3,1fr)}.fmt-grid{grid-template-columns:1fr !important}}
+@media(max-width:600px){.card{padding:24px 18px}.row,.tgrid{grid-template-columns:1fr}.estados-grid{grid-template-columns:repeat(3,1fr)}.fmt-grid{grid-template-columns:1fr !important}input,select,textarea{font-size:16px !important}.suc-aviso{font-size:11.5px;padding:10px 14px}.suc-aviso code{font-size:10.5px}.suc-h2{font-size:24px}.suc-bg{padding:20px}}
 `
 

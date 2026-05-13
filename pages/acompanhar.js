@@ -258,5 +258,5 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .not-found-txt{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
 .not-found-sub{font-size:13px;color:var(--muted)}
 .footer{text-align:center;margin-top:36px;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px}.footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(0,172,235,.3);padding-bottom:1px;transition:color .2s,border-color .2s}.footer a:hover{color:var(--accent);border-color:var(--accent)}
-@media(max-width:500px){.search-row{flex-direction:column}.info-grid,.entrega-grid{grid-template-columns:1fr}}
+@media(max-width:500px){.search-row{flex-direction:column}.info-grid,.entrega-grid{grid-template-columns:1fr}input,select,textarea,.search-input{font-size:16px !important}}
 `
